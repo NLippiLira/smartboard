@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>NoteFlow</title>
+  <title>SmartBoard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Bootstrap -->
@@ -14,38 +14,33 @@
 
   <nav class="navbar navbar-dark bg-dark">
     <div class="container">
-      <span class="navbar-brand">📝 NoteFlow</span>
+      <span class="navbar-brand">🧠 SmartBoard</span>
     </div>
   </nav>
 
   <main class="container mt-4">
 
-    <section class="card shadow-sm p-4 mb-4">
-      <h5 class="mb-3">Nueva nota</h5>
+    <div class="row g-3">
 
-      <input
-        type="text"
-        id="noteTitle"
-        class="form-control mb-2"
-        placeholder="Título de la nota"
-      >
+      <!-- TODO -->
+      <div class="col-md-4">
+        <h5 class="text-center">📝 To Do</h5>
+        <ul id="todoList" class="list-group min-vh-50"></ul>
+      </div>
 
-      <textarea
-        id="noteContent"
-        class="form-control mb-3"
-        rows="4"
-        placeholder="Contenido..."
-      ></textarea>
+      <!-- IN PROGRESS -->
+      <div class="col-md-4">
+        <h5 class="text-center">⏳ En progreso</h5>
+        <ul id="progressList" class="list-group min-vh-50"></ul>
+      </div>
 
-      <button id="saveBtn" class="btn btn-primary w-100">
-        Guardar nota
-      </button>
-    </section>
+      <!-- DONE -->
+      <div class="col-md-4">
+        <h5 class="text-center">✅ Hecho</h5>
+        <ul id="doneList" class="list-group min-vh-50"></ul>
+      </div>
 
-    <section>
-      <h5 class="mb-3">📚 Mis notas</h5>
-      <div id="notesList" class="row g-3"></div>
-    </section>
+    </div>
 
   </main>
 
