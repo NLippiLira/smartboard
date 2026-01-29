@@ -1,0 +1,25 @@
+body {
+  min-height: 100vh;
+}
+
+.card-note {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-note:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
+}
+
+.note-title {
+  font-weight: 600;
+}
+
+.note-date {
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.btn-delete {
+  font-size: 0.85rem;
+}
