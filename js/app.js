@@ -12,7 +12,7 @@ let notes = JSON.parse(localStorage.getItem('notes')) || [];
 // Load theme from LocalStorage
 let darkTheme = localStorage.getItem('darkTheme') === 'true';
 
-// Save notes to LocalStorage
+// Save notes
 function saveNotes() {
     localStorage.setItem('notes', JSON.stringify(notes));
 }
@@ -36,13 +36,13 @@ themeToggle.addEventListener('click', () => {
     applyTheme();
 });
 
-// Render notes (with optional filter)
+// Render notes
 function renderNotes(filter = '') {
     notesContainer.innerHTML = '';
     notes.forEach((note, index) => {
         if (note.toLowerCase().includes(filter)) {
             const noteDiv = document.createElement('div');
-            noteDiv.className = 'note';
+            noteDiv.className = 'note col-12';
             noteDiv.innerHTML = `
                 <span>${note}</span>
                 <div>
@@ -100,7 +100,7 @@ deleteAllBtn.addEventListener('click', () => {
     }
 });
 
-// Search / filter notes
+// Search notes
 searchInput.addEventListener('input', () => {
     const query = searchInput.value.toLowerCase();
     renderNotes(query);
