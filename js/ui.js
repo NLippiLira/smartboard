@@ -1,43 +1,51 @@
-export function renderNotes(notes) {
-  const notesList = document.getElementById('notesList');
-  notesList.innerHTML = '';
+// ===============================
+// SmartBoard - storage.js
+// Paso 4: datos + persistencia
+// ===============================
 
-  if (notes.length === 0) {
-    notesList.innerHTML = `
-      <p class="text-muted text-center">
-        No hay notas todavía
-      </p>
-    `;
-    return;
-  }
+const STORAGE_KEY = "smartboard-tasks";
 
-  notes.forEach(note => {
-    const col = document.createElement('div');
-    col.className = 'col-md-4';
-
-    col.innerHTML = `
-      <div class="card card-note h-100 shadow-sm">
-        <div class="card-body d-flex flex-column">
-          <h6 class="note-title">${note.title}</h6>
-          <p class="flex-grow-1">${note.content}</p>
-          <div class="d-flex justify-content-between align-items-center">
-            <span class="note-date">${note.date}</span>
-            <button
-              class="btn btn-sm btn-danger btn-delete"
-              data-id="${note.id}"
-            >
-              Eliminar
-            </button>
-          </div>
-        </div>
-      </div>
-    `;
-
-    notesList.appendChild(col);
-  });
+// -------------------------------
+// Obtener todas las tareas
+// -------------------------------
+export function getTasks() {
+  const data = localStorage.getItem(STORAGE_KEY);
+  return data ? JSON.parse(data) : [];
 }
 
-export function clearForm() {
-  document.getElementById('noteTitle').value = '';
-  document.getElementById('noteContent').value = '';
+// -------------------------------
+// Guardar todas las tareas
+// -------------------------------
+function saveTasks(tasks) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+}
+
+// -------------------------------
+// Agregar tarea
+// -------------------------------
+export function addTask(task) {
+  const tasks = getTasks();
+  tasks.push(task);
+  saveTasks(tasks);
+}
+
+// -------------------------------
+// Eliminar tarea
+// -------------------------------
+export function deleteTask(taskId) {
+  const tasks = getTasks().filter(task => task.id !== taskId);
+  saveTasks(tasks);
+}
+
+// -------------------------------
+// Mover tarea (cambiar estado)
+// -------------------------------
+export function moveTask(taskId, newStatus) {
+  const tasks = getTasks();
+
+  const task = tasks.find(t => t.id === taskId);
+  if (!task) return;
+
+  task.status = newStatus;
+  saveTasks(tasks);
 }

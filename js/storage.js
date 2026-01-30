@@ -1,52 +1,51 @@
 // ===============================
 // SmartBoard - storage.js
-// Persistencia y estado global
+// Paso 4: datos + persistencia
 // ===============================
 
 const STORAGE_KEY = "smartboard-tasks";
 
-// Estado base
-let tasks = loadTasks();
-
-// ===============================
-// LocalStorage
-// ===============================
-function loadTasks() {
+// -------------------------------
+// Obtener todas las tareas
+// -------------------------------
+export function getTasks() {
   const data = localStorage.getItem(STORAGE_KEY);
   return data ? JSON.parse(data) : [];
 }
 
-function saveTasks() {
+// -------------------------------
+// Guardar todas las tareas
+// -------------------------------
+function saveTasks(tasks) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
 }
 
-// ===============================
-// CRUD
-// ===============================
-export function getTasks() {
-  return tasks;
-}
-
+// -------------------------------
+// Agregar tarea
+// -------------------------------
 export function addTask(task) {
+  const tasks = getTasks();
   tasks.push(task);
-  saveTasks();
+  saveTasks(tasks);
 }
 
-export function updateTask(updatedTask) {
-  tasks = tasks.map(task =>
-    task.id === updatedTask.id ? updatedTask : task
-  );
-  saveTasks();
-}
-
+// -------------------------------
+// Eliminar tarea
+// -------------------------------
 export function deleteTask(taskId) {
-  tasks = tasks.filter(task => task.id !== taskId);
-  saveTasks();
+  const tasks = getTasks().filter(task => task.id !== taskId);
+  saveTasks(tasks);
 }
 
+// -------------------------------
+// Mover tarea (cambiar estado)
+// -------------------------------
 export function moveTask(taskId, newStatus) {
-  tasks = tasks.map(task =>
-    task.id === taskId ? { ...task, status: newStatus } : task
-  );
-  saveTasks();
+  const tasks = getTasks();
+
+  const task = tasks.find(t => t.id === taskId);
+  if (!task) return;
+
+  task.status = newStatus;
+  saveTasks(tasks);
 }

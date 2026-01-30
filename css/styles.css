@@ -1,25 +1,39 @@
+/* ===============================
+   SmartBoard - styles.css
+   Paso 3: base visual
+=============================== */
+
 body {
-  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 }
 
-.card-note {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* Columnas */
+section {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 12px;
+  min-height: 300px;
 }
 
-.card-note:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
-}
-
-.note-title {
+/* Títulos */
+section h5 {
   font-weight: 600;
 }
 
-.note-date {
-  font-size: 0.8rem;
-  color: #6c757d;
+/* Listas */
+.list-group {
+  min-height: 220px;
 }
 
-.btn-delete {
-  font-size: 0.85rem;
+/* Tarea */
+.list-group-item {
+  cursor: grab;
+  user-select: none;
+}
+
+/* Placeholder vacío */
+.list-group-item.text-muted {
+  background: transparent;
+  border: 1px dashed #ced4da;
 }
